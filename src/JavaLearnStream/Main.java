@@ -2,13 +2,16 @@ package JavaLearnStream;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class Main {
 
     public static void main(String[] args) {
         List<Person> people = getPeople();
 
-        //Imperative
+        //Imperative --------------------------
 //        List<JavaLearnStream.Person> females = new ArrayList<>();
 //
 //        for (JavaLearnStream.Person person : people) {
@@ -18,13 +21,12 @@ public class Main {
 //        }
 //        females.forEach(System.out::println);
 
-        //Declarative
-
+        //Declarative --------------------------
 
         //Filter
         List<Person> females = people.stream()
                 .filter(person -> person.getGender().equals(Gender.FEMALE))
-                .toList();
+                .collect(Collectors.toList());
 
         //Sort
         List<Person> sortedByGender = people.stream()
@@ -44,15 +46,45 @@ public class Main {
         //Any match
         boolean anyMatch = people.stream()
                 .anyMatch(person -> person.getAge() > 127);
+
+        //NoneMatch
+        boolean noneMatch = people.stream()
+                .noneMatch(person -> person.getName().equals("Antonio"));
+
         //Max
+        List<Person> maxAge = people.stream()
+                .max(Comparator.comparing(Person::getAge))
+                        .stream().toList();
+
+
+
+
         //Min
+        people.stream()
+                .min(Comparator.comparing(Person::getAge))
+                .ifPresent(System.out::println);
         //Group
+        Map<Gender, List<Person>> groupByGender = people.stream()
+                .collect(Collectors.groupingBy(Person::getGender));
+
+        groupByGender.forEach(((gender, people1) -> {
+            System.out.println(gender);
+            people1.forEach(System.out::println);
+        }));
+
+        Optional<String> oldestFemale = people.stream()
+                .filter(person -> person.getGender().equals(Gender.FEMALE))
+                .max(Comparator.comparing(Person::getAge))
+                .map(Person::getName);
+
+        oldestFemale.ifPresent(System.out::println);
 
         //Print
-        females.forEach(System.out::println);
+//        maxAge.forEach(System.out::println);
+//        females.forEach(System.out::println);
 //        sortedByGender.forEach(System.out::println);
 //        sortedByAge.forEach(System.out::println);
-        System.out.println(anyMatch);
+//        System.out.println(noneMatch);
     }
 
     private static List<Person> getPeople() {
