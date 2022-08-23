@@ -1,3 +1,5 @@
+package JavaLearnStream;
+
 public class Person {
     private final String name;
     private final int age;
@@ -23,7 +25,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
+        return "JavaLearnStream.Person{" +
                 "name='" + name + '\'' +
                 ", age=" + age +
                 ", gender=" + gender +

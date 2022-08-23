@@ -1,8 +1,7 @@
-import java.util.ArrayList;
-import java.util.Collections;
+package JavaLearnStream;
+
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Main {
 
@@ -10,10 +9,10 @@ public class Main {
         List<Person> people = getPeople();
 
         //Imperative
-//        List<Person> females = new ArrayList<>();
+//        List<JavaLearnStream.Person> females = new ArrayList<>();
 //
-//        for (Person person : people) {
-//            if (person.getGender().equals(Gender.FEMALE)) {
+//        for (JavaLearnStream.Person person : people) {
+//            if (person.getGender().equals(JavaLearnStream.Gender.FEMALE)) {
 //                females.add(person);
 //            }
 //        }
