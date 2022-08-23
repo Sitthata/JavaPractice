@@ -25,17 +25,17 @@ public class Main {
         //Filter
         List<Person> females = people.stream()
                 .filter(person -> person.getGender().equals(Gender.FEMALE))
-                .collect(Collectors.toList());
+                .toList();
 
         //Sort
         List<Person> sortedByGender = people.stream()
                 .sorted(Comparator.comparing(Person::getGender).thenComparing(Person::getAge).reversed())
-                .collect(Collectors.toList());
+                .toList();
 
 
         List<Person> sortedByAge = people.stream()
                 .sorted(Comparator.comparing(Person::getAge))
-                .collect(Collectors.toList());
+                .toList();
 
         //All match
         boolean allMatch = people.stream()
@@ -43,14 +43,17 @@ public class Main {
 
 
         //Any match
+        boolean anyMatch = people.stream()
+                .anyMatch(person -> person.getAge() > 127);
         //Max
         //Min
         //Group
 
         //Print
+        females.forEach(System.out::println);
 //        sortedByGender.forEach(System.out::println);
 //        sortedByAge.forEach(System.out::println);
-        System.out.println(allMatch);
+        System.out.println(anyMatch);
     }
 
     private static List<Person> getPeople() {
